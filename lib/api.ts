@@ -23,7 +23,6 @@ export async function fetchNotes(
 ): Promise<FetchNotesResponse> {
   const { tag, ...rest } = params;
 
-  // ✅ якщо tag = "all" або його немає — не передаємо взагалі
   const requestParams = tag && tag !== "all" ? { ...rest, tag } : rest;
 
   const { data } = await apiClient.get<FetchNotesResponse>("/notes", {

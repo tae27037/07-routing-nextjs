@@ -1,16 +1,16 @@
-import type { ReactNode } from "react";
-import css from "./LayoutNotes.module.css"; // скопіюй готовий файл стилів
+import "./globals.css";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
-type Props = {
-  children: ReactNode;
-  sidebar: ReactNode;
-};
-
-export default function FilterLayout({ children, sidebar }: Props) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <div className={css.wrapper}>
-      <aside className={css.sidebar}>{sidebar}</aside>
-      <section className={css.content}>{children}</section>
-    </div>
+    <html lang="en">
+      <body>
+        <TanStackProvider>{children}</TanStackProvider>
+      </body>
+    </html>
   );
 }
