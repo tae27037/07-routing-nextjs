@@ -9,7 +9,7 @@ type PageProps = {
 };
 
 export default async function NotesPage({ params }: PageProps) {
-  await params; // ✅ обязательно await (по требованиям проверки)
+  await params;
 
   const queryClient = new QueryClient();
 
