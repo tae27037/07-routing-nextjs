@@ -15,14 +15,21 @@ export type FetchNotesParams = {
   page?: number;
   perPage?: number;
   search?: string;
+  tag?: string; // ✅ для фільтрації
 };
 
 export async function fetchNotes(
-  params: FetchNotesParams,
+  params: FetchNotesParams = {},
 ): Promise<FetchNotesResponse> {
+  const { tag, ...rest } = params;
+
+  // ✅ якщо tag = "all" або його немає — не передаємо взагалі
+  const requestParams = tag && tag !== "all" ? { ...rest, tag } : rest;
+
   const { data } = await apiClient.get<FetchNotesResponse>("/notes", {
-    params,
+    params: requestParams,
   });
+
   return data;
 }
 

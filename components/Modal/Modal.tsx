@@ -11,9 +11,9 @@ interface ModalProps {
 
 function useIsClient() {
   return useSyncExternalStore(
-    () => () => {}, // subscribe (ничего не подписываем)
-    () => true, // snapshot на клиенте
-    () => false, // snapshot на сервере
+    () => () => {},
+    () => true,
+    () => false,
   );
 }
 
@@ -26,14 +26,14 @@ export default function Modal({ onClose, children }: ModalProps) {
     const prevOverflow = document.body.style.overflow;
     document.body.style.overflow = "hidden";
 
-    const onKeyDown = (e: KeyboardEvent) => {
+    const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
 
-    window.addEventListener("keydown", onKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
 
     return () => {
-      window.removeEventListener("keydown", onKeyDown);
+      window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = prevOverflow;
     };
   }, [isClient, onClose]);
@@ -45,7 +45,7 @@ export default function Modal({ onClose, children }: ModalProps) {
       className={css.backdrop}
       role="dialog"
       aria-modal="true"
-      onClick={(e: React.MouseEvent<HTMLDivElement>) => {
+      onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
