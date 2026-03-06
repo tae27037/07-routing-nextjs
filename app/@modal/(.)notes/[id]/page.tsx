@@ -1,6 +1,6 @@
 import { fetchNoteById } from "@/lib/api";
 import ModalRoute from "@/components/Modal/ModalRoute";
-import NotePreview from "@/components/NotePreview/NotePreview";
+import NotePreviewClient from "./NotePreview.client";
 
 type Props = { params: { id: string } };
 
@@ -9,7 +9,7 @@ export default async function NoteModalPage({ params }: Props) {
 
   return (
     <ModalRoute>
-      <NotePreview note={note} />
+      <NotePreviewClient note={note} />
     </ModalRoute>
   );
 }

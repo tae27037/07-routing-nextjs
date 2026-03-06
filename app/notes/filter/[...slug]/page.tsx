@@ -1,5 +1,4 @@
-import { fetchNotes } from "@/lib/api";
-import NoteList from "@/components/NoteList/NoteList";
+import NotesClient from "./Notes.client";
 import css from "./page.module.css";
 
 type Props = {
@@ -8,16 +7,13 @@ type Props = {
   };
 };
 
-export default async function FilterNotesPage({ params }: Props) {
+export default function FilterNotesPage({ params }: Props) {
   const filter = params.slug?.[0] ?? "all";
   const tag = filter === "all" ? undefined : filter;
 
-  const data = await fetchNotes({ page: 1, perPage: 12, tag });
-  const notes = data.notes;
-
   return (
     <div className={css.wrapper}>
-      <NoteList notes={notes} />
+      <NotesClient tag={tag} />
     </div>
   );
 }
